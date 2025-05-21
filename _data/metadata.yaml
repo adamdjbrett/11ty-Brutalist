@@ -13,6 +13,8 @@ metasocial:
 navbar:
   title: "Brutalism"
   item:
+    - nav: Blog
+      url: /blog/
     - nav: My Web
       url: htps://adamdjbrett.com
     - nav: Github
