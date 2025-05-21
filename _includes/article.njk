@@ -1,0 +1,31 @@
+<div class="sections">
+  {%- for post in pagination.items %}
+  <div class="section">
+    <div
+      class="wrapper"
+      style="opacity: 0; transform: translateX(-100vw) scale(0) translateZ(0px)"
+    >
+      <div class="textWrapper">
+        <h2><a href="{{post.url}}">{{post.data.title}}</a></h2>
+        <p class="bodytext justified articles">{{post.data.description}}</p>
+      </div>
+      <a href="{{post.url}}"
+        ><img
+          src="{{post.data.image or metadata.image}}"
+          alt="{{post.data.title}}"
+      /></a>
+    </div>
+  </div>
+  {% endfor %} {{content|safe}}
+  <div class="pagination">
+    {% if pagination.href.previous %}<a
+      href="{{ pagination.href.previous }}"
+      class="pagination-btn prev-btn"
+      >← Previous</a
+    >{% endif %} {% if pagination.href.next %}<a
+      href="{{ pagination.href.next }}"
+      class="pagination-btn next-btn"
+      >Next →</a
+    >{% endif %}
+  </div>
+</div>
