@@ -1,0 +1,30 @@
+<header>
+  <h2><a href="{{ metadata.url }}">{{ metadata.navbar.title }}</a></h2>
+  <nav>
+    <ul>
+      {% for n in metadata.navbar.item %}
+      <li>
+        <a href="{{ n.url }}">
+          <h2>{{ n.nav }}</h2>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
+
+<div class="hero" style="transform: none">
+  <h1>
+    <a href="{{page.url or metadata.url}}">{{ title or metadata.title }}</a>
+  </h1>
+  <p class="bodytext">{{ description or metadata.description }}</p>
+
+  {% if tags %}
+  <p class="bodytext small">
+    {%- for tag in tags | filterTagList %} {%- set tagUrl %}/tags/{{ tag |
+    slugify }}/{% endset %}
+    <a href="{{ tagUrl }}">{{ tag }}</a>
+    {%- if not loop.last %}, {% endif %} {%- endfor %}
+  </p>
+  {% endif %}
+</div>

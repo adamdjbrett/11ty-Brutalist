@@ -1,0 +1,62 @@
+---
+layout: base.njk
+---
+
+<div class="panels" style="transform: none">
+  <div class="panel">
+    <p class="bodytext small">
+      {% if page.date %} Published on
+      <time datetime="{{ page.date | htmlDateString }}"
+        >&nbsp; {{ page.date | readableDate }}</time
+      >&nbsp; by &nbsp;{% endif %}
+      <a href="{{metadata.author.url}}">{{metadata.author.name}}</a>
+    </p>
+    {% if image %}<img src="{{image}}" />{% endif %}
+    <!-- {{content|toc|safe}} -->
+    <div class="bodytext">{{content|safe}}</div>
+  </div>
+</div>
+<hr />
+
+{%- if collections.posts %} {%- set previousPost = collections.posts |
+getPreviousCollectionItem %} {%- set nextPost = collections.posts |
+getNextCollectionItem %} {%- if nextPost or previousPost %}
+<div class="sections">
+  {%- if previousPost %}
+  <div class="section">
+    <div
+      class="wrapper"
+      style="opacity: 0; transform: translateX(-100vw) scale(0) translateZ(0px)"
+    >
+      <div class="textWrapper">
+        <a href="{{previousPost.url}}"
+          ><h2>{{previousPost.data.title}}</h2>
+          <p class="bodytext justified">{{previousPost.data.description}}</p></a
+        >
+      </div>
+      <a href="{{previousPost.url}}"
+        ><img src="{{previousPost.data.image or metadata.image}}"
+      /></a>
+    </div>
+  </div>
+  {% endif %} {%- if nextPost %}
+  <div class="section">
+    <div
+      class="wrapper"
+      style="opacity: 0; transform: translateX(100vw) scale(0) translateZ(0px)"
+    >
+      <div class="textWrapper">
+        <a href="{{ nextPost.url }}"
+          ><h2>{{ nextPost.data.title }}</h2>
+          <p class="bodytext justified">{{ nextPost.data.description }}</p></a
+        >
+      </div>
+      <a href="{{ nextPost.url }}">
+        <img src="{{ nextPost.data.image or metadata.image }}"
+      /></a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<hr />
+{%- endif %} {%- endif %}

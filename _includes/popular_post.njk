@@ -1,0 +1,26 @@
+{% if show_popular_post %}
+<hr />
+<div class="examples">
+  <h1>{{metadata.popular_post}}</h1>
+  {% for post in collections.popular | shuffle | limit(3) %}
+  <div class="section">
+    <div
+      class="wrapper{% if loop.index0 % 2 == 1 %} row-reverse{% endif %}"
+      style="opacity: 0; transform: translateX(-100vw) scale(0) translateZ(0px)"
+    >
+      <div class="textWrapper">
+        <a href="{{post.url}}">
+          <h2>{{post.data.title}}</h2>
+          <p class="bodytext justified articles">
+            {{post.data.description}}
+          </p></a
+        >
+      </div>
+      {% if post.data.image %}<a href="{{post.url}}"
+        ><img src="{{post.data.image}}" /></a
+      >{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
